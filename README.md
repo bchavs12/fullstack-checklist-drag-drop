@@ -54,18 +54,23 @@ DB_PORT=3308
 
 ---
 
-### ⚙️ Passo a passo com Docker
+### 🐳 Usando Docker (Recomendado)
 
 ```bash
-# 1. Clone o repositório
-git clone https://github.com/seu-usuario/nome-do-repo.git
-cd nome-do-repo
+# 1. Clone o projeto
+git clone https://github.com/seu-usuario/checklist-app.git
+cd checklist-app
 
-# 2. Suba os containers
-docker-compose up -d
+# 2. Suba o backend + banco de dados
+docker-compose up --build
 
-# 3. Acesse em
+# 3. Acesse a aplicação
 http://localhost:3000
+
+
+# Docker pode ser desafiador para iniantes
+# caso não saiba usar pode rodar projeto local usando npm
+# passo-passo com npm logo abaixo
 ```
 
 ### 💻 Passo a passo manual (sem Docker)
