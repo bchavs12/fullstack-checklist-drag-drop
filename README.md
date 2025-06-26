@@ -54,26 +54,7 @@ DB_PORT=3308
 
 ---
 
-### 🐳 Usando Docker (Recomendado)
-
-```bash
-# 1. Clone o projeto
-git clone https://github.com/seu-usuario/checklist-app.git
-cd checklist-app
-
-# 2. Suba o backend + banco de dados
-docker-compose up --build
-
-# 3. Acesse a aplicação
-http://localhost:3000
-
-
-# Docker pode ser desafiador para iniantes
-# caso não saiba usar pode rodar projeto local usando npm
-# passo-passo com npm logo abaixo
-```
-
-### 💻 Passo a passo manual (sem Docker)
+### 💻 Passo a passo manual
 
 ```bash
 # 1. Clone o projeto
@@ -104,8 +85,7 @@ node server.js
 📄 server.js          → API com Express
 📄 db.js              → Conexão com MySQL
 📄 init.sql           → Script inicial para o banco de dados
-📄 Dockerfile         → Configuração para rodar node em docker
-📄 docker-compose.yml → Configuração do ambiente Docker
+📄 docker-compose.yml → Configuração do ambiente Docker(mySQL)
 
 ```
 
