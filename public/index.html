@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>Checklist</h1>
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="Nova atividade..." required />
+      <button type="submit">Adicionar</button>
+    </form>
+    <div class="task-columns">
+      <div class="task-column">
+        <h2>Pendentes</h2>
+        <ul id="pending-tasks" class="task-list" data-status="pending"></ul>
+      </div>
+      <div class="task-column">
+        <h2>Resolvidas</h2>
+        <ul id="completed-tasks" class="task-list" data-status="completed"></ul>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

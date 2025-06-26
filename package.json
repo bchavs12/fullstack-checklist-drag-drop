@@ -1,0 +1,21 @@
+{
+  "name": "checklist",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon -- watch server.js"
+  },
+  "keywords": [],
+  "author": "Bruno C. Silveira",
+  "license": "MIT",
+  "description": "Checkt list app",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

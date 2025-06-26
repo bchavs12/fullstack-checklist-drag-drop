@@ -1,0 +1,12 @@
+# docker-compose.yml
+services:
+  mysql:
+    image: mysql:latest
+    container_name: checklist-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: checklist
+    ports:
+      - 3308:3306
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

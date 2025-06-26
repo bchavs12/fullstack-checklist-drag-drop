@@ -1,0 +1,131 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.task-columns {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.task-column {
+  flex: 1;
+  min-width: 300px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-column h2 {
+  margin-top: 0;
+  color: #555;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-height: 50px;
+}
+
+.task-list li {
+  background-color: #e9ecef;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: grab;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.task-list li.completed {
+  background-color: #d4edda;
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
+.task-list li.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+}
+
+.task-list li.drag-over-top {
+  border-top: 2px solid #007bff;
+}
+
+.task-list li.drag-over-bottom {
+  border-bottom: 2px solid #007bff;
+}
+
+.task-text {
+  flex-grow: 1;
+}
+
+.task-list button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.task-list.invalid-drop {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
