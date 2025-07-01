@@ -32,11 +32,23 @@ function renderTasks() {
     span.textContent = task.text;
     span.className = "task-text";
 
+    let editBtn = null;
+
+    if (!task.completed) {
+      editBtn = document.createElement('button');
+      editBtn.textContent = "✏️";
+      editBtn.addEventListener("click", () => enableEdit(task, span, li));
+    }
+
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = "🗑️";
     deleteBtn.addEventListener('click', () => deleteTask(task.id));
 
-    li.append(checkbox, span, deleteBtn);
+    if (editBtn) {
+      li.append(checkbox, span, editBtn, deleteBtn);
+    } else {
+      li.append(checkbox, span, deleteBtn);
+    }
 
     if (task.completed) {
       completedList.appendChild(li);
@@ -67,6 +79,74 @@ async function toggleComplete(id, completed) {
 
   tasks = tasks.map(t => t.id === id ? { ...t, completed } : t);
   renderTasks();
+}
+
+function enableEdit(task, span, li) {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = task.text;
+  input.className = "task-edit-input";
+
+  const saveBtn = document.createElement("button");
+  saveBtn.className = "save-btn";
+
+  const cancelBtn = document.createElement("button");
+  cancelBtn.className = "cancel-btn";
+
+  // Container para edição
+  const editContainer = document.createElement("div");
+  editContainer.className = "edit-container";
+  editContainer.append(input, saveBtn, cancelBtn);
+
+  if (span.parentNode === li) {
+    li.replaceChild(editContainer, span);
+  } else {
+    // Garante que substituímos o elemento correto mesmo se a estrutura mudou
+    li.insertBefore(editContainer, li.firstChild);
+    if (span.parentNode) {
+      span.parentNode.removeChild(span);
+    }
+  }
+
+  input.focus();
+
+  // Eventos
+  saveBtn.addEventListener("click", () => finishEdit(input, task, li));
+  cancelBtn.addEventListener("click", () => li.replaceChild(span, editContainer));
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") finishEdit(input, task, li);
+    if (e.key === "Escape") li.replaceChild(span, editContainer);
+  });
+}
+
+async function finishEdit(input, task, li) {
+  const newText = input.value.trim();
+  if (!newText || newText === task.text) {
+    renderTasks();
+    return;
+  }
+
+  try {
+    await fetch(`/api/tasks/edit/${task.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: newText }),
+    });
+
+    task.text = newText;
+
+    // Feedback visual
+    const feedback = document.createElement("span");
+    feedback.textContent = newText;
+    feedback.className = "task-text saved";
+
+    li.replaceChild(feedback, li.querySelector(".edit-container"));
+
+    setTimeout(() => renderTasks(), 800);
+  } catch (err) {
+    alert("Erro ao atualizar a tarefa.");
+    renderTasks();
+  }
 }
 
 async function deleteTask(id) {

@@ -101,6 +101,34 @@ button:hover {
   color: #6c757d;
 }
 
+/* Task-edit */
+.task-edit-input {
+  font-size: 1rem;
+  padding: 4px;
+  margin-right: 8px;
+  width: 200px;
+}
+
+.edit-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 2px 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.saved {
+  color: green;
+  font-weight: bold;
+}
+
 .task-list li.dragging {
   opacity: 0.5;
   transform: scale(0.95);

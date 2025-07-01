@@ -79,6 +79,36 @@ app.post('/api/tasks/reorder', async (req, res) => {
 
 })
 
+app.put("/api/tasks/edit/:id", async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+
+  if (!text) return res.status(400).json({ error: "Texto e necessário" });
+
+  try {
+
+    // Verifica se a tarefa está concluída
+    const [[task]] = await DB.query("SELECT completed FROM tasks WHERE id = ?", [id]);
+
+    if (!task) {
+      return res.status(404).json({ error: "Tarefa não foi encontrada" });
+    }
+
+    if (task.completed) {
+      return res.status(400).json({ error: "Tarefa já concluída não pode ser editada" });
+    }
+
+    // Atualiza o texto da tarefa
+    await DB.query("UPDATE tasks SET text = ? WHERE id = ?", [text, id]);
+    res.status(200).json({ message: "Tarefa foi atualizada com sucesso!" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Erro no servidor!" });
+  }
+});
+
+
 app.delete('/api/tasks/:id', async (req, res) => {
   await DB.query('DELETE FROM tasks WHERE id = ?', [req.params.id]);
   res.sendStatus(204);
